@@ -5,4 +5,5 @@ initCowSwapWidget({
   env: CowSwapWidgetEnv.local,
   width: 400,
   height: 600,
+  chainId: 1,
 })

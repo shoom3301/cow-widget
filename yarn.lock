@@ -336,6 +336,13 @@
   resolved "https://registry.yarnpkg.com/@eslint/js/-/js-8.43.0.tgz#559ca3d9ddbd6bf907ad524320a0d14b85586af0"
   integrity sha512-s2UHCoiXfxMvmfzqoN+vrQ84ahUSYde9qNO1MdxmoEhyHWsfmwOpFlwYV+ePJEVc7gFnATGUi376WowX1N7tFg==
 
+"@ethvault/iframe-provider@^0.1.10":
+  version "0.1.10"
+  resolved "https://registry.yarnpkg.com/@ethvault/iframe-provider/-/iframe-provider-0.1.10.tgz#75f35d9bc651587d104ef86843c1d13fe4bc7968"
+  integrity sha512-TKz7B9/e8gkb2V88YwvAPu7Rp7yISNG+oML0zK8mDwSRZXlj1ubBHHG0b6sdpgDoAE6PnI4IhGdy2IEczCW7kA==
+  dependencies:
+    eventemitter3 "^4.0.0"
+
 "@humanwhocodes/config-array@^0.11.10":
   version "0.11.10"
   resolved "https://registry.yarnpkg.com/@humanwhocodes/config-array/-/config-array-0.11.10.tgz#5a3ffe32cc9306365fb3fd572596cd602d5e12d2"
