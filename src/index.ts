@@ -1,3 +1,8 @@
-import { main } from './main'
+import { initCowSwapWidget } from './cowSwapWidget'
+import { CowSwapWidgetEnv } from './types'
 
-main()
+initCowSwapWidget({
+  env: CowSwapWidgetEnv.local,
+  width: 400,
+  height: 600,
+})
