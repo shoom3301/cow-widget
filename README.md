@@ -8,4 +8,5 @@
 4. [x] Add a possibility to set up and change network
 5. [x] Add a possibility to change theme
 6. [x] Add a possibility to use widget without web3 provider
-7. [ ] Add a possibility to add custom tokens
+7. [x] Add a possibility to add custom tokens
+8. [ ] Add a possibility to customize theme

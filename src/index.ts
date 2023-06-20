@@ -22,6 +22,7 @@ const urlParams: CowSwapWidgetUrlParams = {
   theme: 'light',
   tradeAssets: {
     sell: {
+      // asset: '0x543ff227f64aa17ea132bf9886cab5db55dcaddf',
       asset: 'COW',
       amount: '1200',
     },
