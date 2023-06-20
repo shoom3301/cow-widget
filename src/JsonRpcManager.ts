@@ -4,7 +4,7 @@ const JSON_PRC_V = '2.0'
 const TARGET_ORIGIN = '*'
 const EVENTS = ['connect', 'disconnect', 'chainChanged', 'accountsChanged']
 
-export class EthereumJsonRpcManager {
+export class JsonRpcManager {
   ethereumProvider: EthereumProvider | null = null
 
   requests: { [key: string]: JsonRpcRequest } = {}

@@ -32,7 +32,7 @@ const urlParams: CowSwapWidgetUrlParams = {
   },
 }
 
-const widget = initCowSwapWidget({
+const updateWidget = initCowSwapWidget({
   urlParams,
   width: 400,
   height: 600,
@@ -45,5 +45,5 @@ settingsTextarea.value = JSON.stringify(urlParams, null, 4)
 settingsTextarea.addEventListener('blur', () => {
   const newParams = JSON.parse(settingsTextarea.value)
 
-  widget.update(newParams)
+  updateWidget(newParams)
 })

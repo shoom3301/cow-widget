@@ -1,24 +1,43 @@
-import { CowSwapWidgetParams } from './types'
-import { EthereumJsonRpcManager } from './EthereumJsonManager'
-import { CowSwapWidgetManager } from './CowSwapWidgetManager'
-import { buildWidgetUrl } from './urlUtils'
+import { CowSwapWidgetParams, CowSwapWidgetUrlParams } from './types'
+import { JsonRpcManager } from './JsonRpcManager'
+import { buildTradeAmountsQuery, buildWidgetPath, buildWidgetUrl } from './urlUtils'
 
-export function initCowSwapWidget(params: CowSwapWidgetParams): CowSwapWidgetManager {
+const COW_SWAP_WIDGET_KEY = 'cowSwapWidget'
+
+type UpdateWidgetCallback = (params: CowSwapWidgetUrlParams) => void
+
+export function initCowSwapWidget(params: CowSwapWidgetParams): UpdateWidgetCallback {
   const { container, provider } = params
   const iframe = createIframe(params)
 
   container.innerHTML = ''
   container.appendChild(iframe)
 
-  if (!iframe.contentWindow) throw new Error('Iframe does not contain a window!')
+  const { contentWindow } = iframe
+
+  if (!contentWindow) throw new Error('Iframe does not contain a window!')
 
   if (provider) {
-    const jsonRpcManager = new EthereumJsonRpcManager(iframe.contentWindow)
+    const jsonRpcManager = new JsonRpcManager(contentWindow)
 
     jsonRpcManager.onConnect(provider)
   }
 
-  return new CowSwapWidgetManager(iframe.contentWindow)
+  return (params: CowSwapWidgetUrlParams) => updateWidget(params, contentWindow)
+}
+
+function updateWidget(params: CowSwapWidgetUrlParams, contentWindow: Window) {
+  const pathname = buildWidgetPath(params)
+  const search = buildTradeAmountsQuery(params).toString()
+
+  contentWindow.postMessage(
+    {
+      key: COW_SWAP_WIDGET_KEY,
+      pathname,
+      search,
+    },
+    '*'
+  )
 }
 
 function createIframe(params: CowSwapWidgetParams): HTMLIFrameElement {
