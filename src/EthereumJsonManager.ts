@@ -1,5 +1,9 @@
 import { EthereumProvider, JsonRpcRequest } from './types'
 
+const JSON_PRC_V = '2.0'
+const TARGET_ORIGIN = '*'
+const EVENTS = ['connect', 'disconnect', 'chainChanged', 'accountsChanged']
+
 export class EthereumJsonRpcManager {
   ethereumProvider: EthereumProvider | null = null
 
@@ -22,6 +26,12 @@ export class EthereumJsonRpcManager {
     })
 
     this.requests = {}
+
+    EVENTS.forEach((event) => {
+      ethereumProvider.on(event, (params: unknown): void => {
+        this.postMessage({ method: event, params: [params] })
+      })
+    })
   }
 
   processRequest(request: JsonRpcRequest) {
@@ -34,24 +44,10 @@ export class EthereumJsonRpcManager {
 
     request$
       .then((result) => {
-        this.contentWindow.postMessage(
-          {
-            jsonrpc: '2.0',
-            id: request.id,
-            result,
-          },
-          '*'
-        )
+        this.postMessage({ id: request.id, result })
       })
       .catch((error) => {
-        this.contentWindow.postMessage(
-          {
-            jsonrpc: '2.0',
-            id: request.id,
-            error,
-          },
-          '*'
-        )
+        this.postMessage({ id: request.id, error })
       })
   }
 
@@ -63,5 +59,15 @@ export class EthereumJsonRpcManager {
         this.requests[event.data.id] = event.data
       }
     }
+  }
+
+  private postMessage(params: { [key: string]: unknown }) {
+    this.contentWindow.postMessage(
+      {
+        jsonrpc: JSON_PRC_V,
+        ...params,
+      },
+      TARGET_ORIGIN
+    )
   }
 }

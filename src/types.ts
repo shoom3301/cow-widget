@@ -11,6 +11,7 @@ export interface JsonRpcRequest {
 }
 
 export interface EthereumProvider {
+  on(event: string, args: unknown): void
   request<T>(params: JsonRpcRequest): Promise<T>
   enable(): Promise<void>
 }

@@ -2,6 +2,9 @@ import { initCowSwapWidget } from './initCowSwapWidget'
 import { CowSwapWidgetUrlParams } from './types'
 
 const settingsTextarea = document.createElement('textarea')
+
+settingsTextarea.style.width = '400px'
+settingsTextarea.style.height = '200px'
 document.body.appendChild(settingsTextarea)
 
 const iframeContainer = document.createElement('div')
@@ -36,8 +39,6 @@ const widget = initCowSwapWidget({
   provider: window.ethereum,
 })
 
-settingsTextarea.style.width = '400px'
-settingsTextarea.style.height = '200px'
 settingsTextarea.value = JSON.stringify(urlParams, null, 4)
 
 settingsTextarea.addEventListener('blur', () => {
