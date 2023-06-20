@@ -48,6 +48,7 @@ function createIframe(params: CowSwapWidgetParams): HTMLIFrameElement {
   iframe.src = buildWidgetUrl(params.urlParams)
   iframe.width = `${width}px`
   iframe.height = `${height}px`
+  iframe.style.border = '0'
 
   return iframe
 }

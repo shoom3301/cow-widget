@@ -5,7 +5,7 @@ module.exports = (env, argv) => {
   const isDevMode = argv.mode === 'development'
 
   return {
-    entry: isDevMode ? './src/demo.ts' : './src/index.ts',
+    entry: isDevMode ? './src/demo/index.ts' : './src/index.ts',
     module: {
       rules: [
         {
