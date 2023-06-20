@@ -12,12 +12,13 @@ export function initCowSwapWidget(params: CowSwapWidgetParams): CowSwapWidgetMan
 
   if (!iframe.contentWindow) throw new Error('Iframe does not contain a window!')
 
-  const jsonRpcManager = new EthereumJsonRpcManager(iframe.contentWindow)
-  const widgetManager = new CowSwapWidgetManager(iframe.contentWindow)
+  if (provider) {
+    const jsonRpcManager = new EthereumJsonRpcManager(iframe.contentWindow)
 
-  jsonRpcManager.onConnect(provider)
+    jsonRpcManager.onConnect(provider)
+  }
 
-  return widgetManager
+  return new CowSwapWidgetManager(iframe.contentWindow)
 }
 
 function createIframe(params: CowSwapWidgetParams): HTMLIFrameElement {

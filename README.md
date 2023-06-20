@@ -7,4 +7,5 @@
 3. [x] Add a possibility to set up and change trade assets and amounts
 4. [x] Add a possibility to set up and change network
 5. [x] Add a possibility to change theme
-6. [ ] Add a possibility to add custom tokens
+6. [x] Add a possibility to use widget without web3 provider
+7. [ ] Add a possibility to add custom tokens

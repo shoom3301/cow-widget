@@ -10,6 +10,7 @@ export interface JsonRpcRequest {
   params: unknown[]
 }
 
+// https://eips.ethereum.org/EIPS/eip-1193
 export interface EthereumProvider {
   on(event: string, args: unknown): void
   request<T>(params: JsonRpcRequest): Promise<T>
@@ -42,5 +43,5 @@ export interface CowSwapWidgetParams {
   width: number
   height: number
   container: HTMLElement
-  provider: EthereumProvider
+  provider?: EthereumProvider
 }
