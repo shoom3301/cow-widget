@@ -16,6 +16,7 @@ if (!window.ethereum) {
 const urlParams: CowSwapWidgetUrlParams = {
   env: 'local',
   chainId: 1,
+  theme: 'light',
   tradeAssets: {
     sell: {
       asset: 'COW',

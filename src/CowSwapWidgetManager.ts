@@ -8,7 +8,7 @@ export class CowSwapWidgetManager {
 
   update(params: CowSwapWidgetUrlParams) {
     const pathname = buildWidgetPath(params)
-    const search = params.tradeAssets ? buildTradeAmountsQuery(params.tradeAssets).toString() : ''
+    const search = buildTradeAmountsQuery(params).toString()
 
     this.contentWindow.postMessage(
       {

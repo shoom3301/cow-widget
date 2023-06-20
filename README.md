@@ -6,5 +6,5 @@
 2. [x] Hide everything from UI except of Swap widget
 3. [x] Add a possibility to set up and change trade assets and amounts
 4. [x] Add a possibility to set up and change network
-5. [ ] Add a possibility to change theme
+5. [x] Add a possibility to change theme
 6. [ ] Add a possibility to add custom tokens

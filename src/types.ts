@@ -17,6 +17,8 @@ export interface EthereumProvider {
 
 export type CowSwapWidgetEnv = 'local' | 'prod'
 
+export type CowSwapTheme = 'dark' | 'light'
+
 interface TradeAsset {
   asset: string
   amount?: string
@@ -31,6 +33,7 @@ export interface CowSwapWidgetUrlParams {
   env: CowSwapWidgetEnv
   chainId: number
   tradeAssets?: TradeAssets
+  theme?: CowSwapTheme
 }
 
 export interface CowSwapWidgetParams {

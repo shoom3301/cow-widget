@@ -1,10 +1,10 @@
-import { CowSwapWidgetUrlParams, TradeAssets } from './types'
+import { CowSwapWidgetUrlParams } from './types'
 import { COWSWAP_URLS } from './consts'
 
 export function buildWidgetUrl(params: CowSwapWidgetUrlParams): string {
   const host = COWSWAP_URLS[params.env]
   const path = buildWidgetPath(params)
-  const query = params.tradeAssets ? buildTradeAmountsQuery(params.tradeAssets) : ''
+  const query = buildTradeAmountsQuery(params)
 
   return host + '/#' + path + '?' + query
 }
@@ -19,15 +19,24 @@ export function buildWidgetPath(params: CowSwapWidgetUrlParams): string {
   return `/${chainId}/swap/widget/${assetsPath}`
 }
 
-export function buildTradeAmountsQuery({ sell, buy }: TradeAssets): URLSearchParams {
+export function buildTradeAmountsQuery(params: CowSwapWidgetUrlParams): URLSearchParams {
+  const { tradeAssets, theme } = params
   const query = new URLSearchParams()
 
-  if (sell.amount) {
-    query.append('sellAmount', sell.amount)
+  if (tradeAssets) {
+    const { sell, buy } = tradeAssets
+
+    if (sell.amount) {
+      query.append('sellAmount', sell.amount)
+    }
+
+    if (buy.amount) {
+      query.append('buyAmount', buy.amount)
+    }
   }
 
-  if (buy.amount) {
-    query.append('buyAmount', buy.amount)
+  if (theme) {
+    query.append('theme', theme)
   }
 
   return query
