@@ -2,8 +2,8 @@
 
 ## Roadmap
 
-1. [ ] Integrate https://github.com/ethvault/iframe-provider
-2. [ ] Hide everything from UI except of Swap widget
+1. [x] Integrate https://github.com/ethvault/iframe-provider
+2. [x] Hide everything from UI except of Swap widget
 3. [ ] Add a possibility to set up and change trade assets and amounts
 4. [ ] Add a possibility to set up and change network
 5. [ ] Add a possibility to change theme

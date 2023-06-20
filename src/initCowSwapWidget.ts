@@ -1,4 +1,4 @@
-import { CowSwapWidgetEnv } from './types'
+import { CowSwapWidgetEnv, EthereumProvider } from './types'
 import { COWSWAP_URLS } from './consts'
 import { EthereumJsonRpcManager } from './EthereumJsonManager'
 
@@ -7,9 +7,25 @@ export interface CowSwapWidgetParams {
   chainId: number
   width: number
   height: number
+  container: HTMLElement
+  provider: EthereumProvider
 }
 
 export function initCowSwapWidget(params: CowSwapWidgetParams) {
+  const { container, provider } = params
+  const iframe = createIframe(params)
+
+  container.innerHTML = ''
+  container.appendChild(iframe)
+
+  if (!iframe.contentWindow) throw new Error('Iframe does not contain a window!')
+
+  const jsonRpcManager = new EthereumJsonRpcManager(iframe.contentWindow)
+
+  jsonRpcManager.onConnect(provider)
+}
+
+function createIframe(params: CowSwapWidgetParams): HTMLIFrameElement {
   const { env, width, height, chainId } = params
   const url = COWSWAP_URLS[env]
   const route = `/#/${chainId}/swap/widget/WETH`
@@ -19,13 +35,5 @@ export function initCowSwapWidget(params: CowSwapWidgetParams) {
   iframe.width = `${width}px`
   iframe.height = `${height}px`
 
-  document.body.innerHTML = ''
-  document.body.appendChild(iframe)
-
-  // TODO
-  if (!iframe.contentWindow || !window.ethereum) return
-
-  const manager = new EthereumJsonRpcManager(iframe.contentWindow)
-
-  manager.onConnect(window.ethereum)
+  return iframe
 }

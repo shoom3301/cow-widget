@@ -15,7 +15,4 @@ export interface EthereumProvider {
   enable(): Promise<void>
 }
 
-export enum CowSwapWidgetEnv {
-  local = 'local',
-  prod = 'prod',
-}
+export type CowSwapWidgetEnv = 'local' | 'prod'
