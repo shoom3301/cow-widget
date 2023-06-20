@@ -6,7 +6,7 @@ const COW_SWAP_WIDGET_KEY = 'cowSwapWidget'
 
 type UpdateWidgetCallback = (params: CowSwapWidgetUrlParams) => void
 
-export function initCowSwapWidget(params: CowSwapWidgetParams): UpdateWidgetCallback {
+export function cowSwapWidget(params: CowSwapWidgetParams): UpdateWidgetCallback {
   const { container, provider } = params
   const iframe = createIframe(params)
 
