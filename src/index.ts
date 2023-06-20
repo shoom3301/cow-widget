@@ -16,4 +16,13 @@ initCowSwapWidget({
   chainId: 1,
   container: iframeContainer,
   provider: window.ethereum,
+  tradeAssets: {
+    sell: {
+      asset: 'COW',
+      amount: '1200',
+    },
+    buy: {
+      asset: 'WETH',
+    },
+  },
 })

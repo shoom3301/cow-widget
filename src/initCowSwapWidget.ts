@@ -1,4 +1,4 @@
-import { CowSwapWidgetEnv, EthereumProvider } from './types'
+import { CowSwapWidgetEnv, EthereumProvider, TradeAssets } from './types'
 import { COWSWAP_URLS } from './consts'
 import { EthereumJsonRpcManager } from './EthereumJsonManager'
 
@@ -9,6 +9,7 @@ export interface CowSwapWidgetParams {
   height: number
   container: HTMLElement
   provider: EthereumProvider
+  tradeAssets?: TradeAssets
 }
 
 export function initCowSwapWidget(params: CowSwapWidgetParams) {
@@ -26,14 +27,39 @@ export function initCowSwapWidget(params: CowSwapWidgetParams) {
 }
 
 function createIframe(params: CowSwapWidgetParams): HTMLIFrameElement {
-  const { env, width, height, chainId } = params
-  const url = COWSWAP_URLS[env]
-  const route = `/#/${chainId}/swap/widget/WETH`
+  const { width, height } = params
+
   const iframe = document.createElement('iframe')
 
-  iframe.src = url + route
+  iframe.src = buildIframeUrl(params)
   iframe.width = `${width}px`
   iframe.height = `${height}px`
 
   return iframe
+}
+
+function buildIframeUrl(params: CowSwapWidgetParams): string {
+  const { env, chainId, tradeAssets } = params
+
+  const url = COWSWAP_URLS[env]
+  const assetsPath = tradeAssets ? `${tradeAssets.sell.asset}/${tradeAssets.buy.asset}` : ''
+  const route = `/#/${chainId}/swap/widget/${assetsPath}`
+
+  const query = tradeAssets ? buildTradeAmountsQuery(tradeAssets) : ''
+
+  return url + route + (query ? '?' + query : '')
+}
+
+function buildTradeAmountsQuery({ sell, buy }: TradeAssets): URLSearchParams {
+  const query = new URLSearchParams()
+
+  if (sell.amount) {
+    query.append('sellAmount', sell.amount)
+  }
+
+  if (buy.amount) {
+    query.append('buyAmount', buy.amount)
+  }
+
+  return query
 }

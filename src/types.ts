@@ -16,3 +16,13 @@ export interface EthereumProvider {
 }
 
 export type CowSwapWidgetEnv = 'local' | 'prod'
+
+interface TradeAsset {
+  asset: string
+  amount?: string
+}
+
+export interface TradeAssets {
+  sell: TradeAsset
+  buy: TradeAsset
+}
