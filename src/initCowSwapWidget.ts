@@ -1,18 +1,9 @@
-import { CowSwapWidgetEnv, EthereumProvider, TradeAssets } from './types'
-import { COWSWAP_URLS } from './consts'
+import { CowSwapWidgetParams } from './types'
 import { EthereumJsonRpcManager } from './EthereumJsonManager'
+import { CowSwapWidgetManager } from './CowSwapWidgetManager'
+import { buildWidgetUrl } from './urlUtils'
 
-export interface CowSwapWidgetParams {
-  env: CowSwapWidgetEnv
-  chainId: number
-  width: number
-  height: number
-  container: HTMLElement
-  provider: EthereumProvider
-  tradeAssets?: TradeAssets
-}
-
-export function initCowSwapWidget(params: CowSwapWidgetParams) {
+export function initCowSwapWidget(params: CowSwapWidgetParams): CowSwapWidgetManager {
   const { container, provider } = params
   const iframe = createIframe(params)
 
@@ -22,8 +13,11 @@ export function initCowSwapWidget(params: CowSwapWidgetParams) {
   if (!iframe.contentWindow) throw new Error('Iframe does not contain a window!')
 
   const jsonRpcManager = new EthereumJsonRpcManager(iframe.contentWindow)
+  const widgetManager = new CowSwapWidgetManager(iframe.contentWindow)
 
   jsonRpcManager.onConnect(provider)
+
+  return widgetManager
 }
 
 function createIframe(params: CowSwapWidgetParams): HTMLIFrameElement {
@@ -31,35 +25,9 @@ function createIframe(params: CowSwapWidgetParams): HTMLIFrameElement {
 
   const iframe = document.createElement('iframe')
 
-  iframe.src = buildIframeUrl(params)
+  iframe.src = buildWidgetUrl(params.urlParams)
   iframe.width = `${width}px`
   iframe.height = `${height}px`
 
   return iframe
-}
-
-function buildIframeUrl(params: CowSwapWidgetParams): string {
-  const { env, chainId, tradeAssets } = params
-
-  const url = COWSWAP_URLS[env]
-  const assetsPath = tradeAssets ? `${tradeAssets.sell.asset}/${tradeAssets.buy.asset}` : ''
-  const route = `/#/${chainId}/swap/widget/${assetsPath}`
-
-  const query = tradeAssets ? buildTradeAmountsQuery(tradeAssets) : ''
-
-  return url + route + (query ? '?' + query : '')
-}
-
-function buildTradeAmountsQuery({ sell, buy }: TradeAssets): URLSearchParams {
-  const query = new URLSearchParams()
-
-  if (sell.amount) {
-    query.append('sellAmount', sell.amount)
-  }
-
-  if (buy.amount) {
-    query.append('buyAmount', buy.amount)
-  }
-
-  return query
 }

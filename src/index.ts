@@ -1,4 +1,8 @@
 import { initCowSwapWidget } from './initCowSwapWidget'
+import { CowSwapWidgetUrlParams } from './types'
+
+const settingsTextarea = document.createElement('textarea')
+document.body.appendChild(settingsTextarea)
 
 const iframeContainer = document.createElement('div')
 document.body.appendChild(iframeContainer)
@@ -9,13 +13,9 @@ if (!window.ethereum) {
   throw new Error('Injected wallet is not detected')
 }
 
-initCowSwapWidget({
+const urlParams: CowSwapWidgetUrlParams = {
   env: 'local',
-  width: 400,
-  height: 600,
   chainId: 1,
-  container: iframeContainer,
-  provider: window.ethereum,
   tradeAssets: {
     sell: {
       asset: 'COW',
@@ -25,4 +25,22 @@ initCowSwapWidget({
       asset: 'WETH',
     },
   },
+}
+
+const widget = initCowSwapWidget({
+  urlParams,
+  width: 400,
+  height: 600,
+  container: iframeContainer,
+  provider: window.ethereum,
+})
+
+settingsTextarea.style.width = '400px'
+settingsTextarea.style.height = '200px'
+settingsTextarea.value = JSON.stringify(urlParams, null, 4)
+
+settingsTextarea.addEventListener('blur', () => {
+  const newParams = JSON.parse(settingsTextarea.value)
+
+  widget.update(newParams)
 })

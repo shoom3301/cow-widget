@@ -26,3 +26,17 @@ export interface TradeAssets {
   sell: TradeAsset
   buy: TradeAsset
 }
+
+export interface CowSwapWidgetUrlParams {
+  env: CowSwapWidgetEnv
+  chainId: number
+  tradeAssets?: TradeAssets
+}
+
+export interface CowSwapWidgetParams {
+  urlParams: CowSwapWidgetUrlParams
+  width: number
+  height: number
+  container: HTMLElement
+  provider: EthereumProvider
+}
