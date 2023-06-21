@@ -10,13 +10,13 @@ export function buildWidgetUrl(params: CowSwapWidgetUrlParams): string {
 }
 
 export function buildWidgetPath(params: CowSwapWidgetUrlParams): string {
-  const { chainId, tradeAssets } = params
+  const { chainId, tradeAssets, tradeType } = params
 
   const assetsPath = tradeAssets
     ? [tradeAssets.sell.asset, tradeAssets.buy.asset].map(encodeURIComponent).join('/')
     : ''
 
-  return `/${chainId}/swap/widget/${assetsPath}`
+  return `/${chainId}/widget/${tradeType}/${assetsPath}`
 }
 
 export function buildTradeAmountsQuery(params: CowSwapWidgetUrlParams): URLSearchParams {

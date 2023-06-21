@@ -34,6 +34,7 @@ export interface TradeAssets {
 export interface CowSwapWidgetUrlParams {
   env: CowSwapWidgetEnv
   chainId: number
+  tradeType: string
   tradeAssets?: TradeAssets
   theme?: CowSwapTheme
 }

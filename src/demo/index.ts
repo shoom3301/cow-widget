@@ -17,6 +17,7 @@ const urlParams: CowSwapWidgetUrlParams = {
   env: 'local',
   chainId: 1,
   theme: 'light',
+  tradeType: 'swap',
   tradeAssets: {
     sell: {
       // asset: '0x543ff227f64aa17ea132bf9886cab5db55dcaddf',
@@ -44,6 +45,7 @@ function applySettings() {
     env: formState.env,
     chainId: formState.chainId,
     theme: formState.theme,
+    tradeType: formState.tradeType,
     tradeAssets: {
       sell: {
         asset: formState['tradeAssets.sell.asset'],

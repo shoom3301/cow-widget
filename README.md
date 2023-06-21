@@ -9,7 +9,7 @@
 5. [x] Theme changing
 6. [x] Standalone mode without passing a wallet provider
 7. [x] Automatic adding custom tokens
-8. [ ] Enable widget for limit and advanced orders
+8. [x] Enable widget for limit and advanced orders
 9. [ ] Customizing the theme palette
 10. [ ] Remove navigations to other pages (click on logo or cow token)
 11. [ ] Change or hide logo

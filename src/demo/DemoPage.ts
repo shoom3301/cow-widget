@@ -93,6 +93,14 @@ export function DemoPage(): HTMLElement {
                     </select>
                 </label>
                 <label>
+                    <span>Trade type</span>
+                    <select name="tradeType">
+                        <option value="swap" selected="selected">Swap</option>
+                        <option value="limit-orders">Limit orders</option>
+                        <option value="advanced-orders">Advanced orders</option>
+                    </select>
+                </label>
+                <label>
                     <span>Sell currency</span>
                     <input name="tradeAssets.sell.asset" type="text" value="COW"/>
                 </label>
