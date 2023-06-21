@@ -6,12 +6,6 @@ import { ProviderMode } from './ProviderMode'
 const demoPage = DemoPage()
 document.body.appendChild(demoPage)
 
-if (!window.ethereum) {
-  alert('Please, enable Metamask extension')
-
-  throw new Error('Injected wallet is not detected')
-}
-
 const urlParams: CowSwapWidgetUrlParams = {
   env: 'local',
   chainId: 1,

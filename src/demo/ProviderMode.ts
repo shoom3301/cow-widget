@@ -12,8 +12,14 @@ export function ProviderMode(init: (ethereum?: EthereumProvider) => void) {
     init(window.ethereum)
     toggleMode()
   })
+
   standaloneModeButton.addEventListener('click', () => {
     init()
     toggleMode()
   })
+
+  if (!window.ethereum) {
+    toggleMode()
+    connectedProviderButton.style.display = 'none'
+  }
 }
