@@ -4,9 +4,14 @@
 
 1. [x] Integrate https://github.com/ethvault/iframe-provider
 2. [x] Hide everything from UI except of Swap widget
-3. [x] Add a possibility to set up and change trade assets and amounts
-4. [x] Add a possibility to set up and change network
-5. [x] Add a possibility to change theme
-6. [x] Add a possibility to use widget without web3 provider
-7. [x] Add a possibility to add custom tokens
-8. [ ] Add a possibility to customize theme
+3. [x] Set up and change trade assets and amounts
+4. [x] Set up and change network
+5. [x] Theme changing
+6. [x] Standalone mode without passing a wallet provider
+7. [x] Automatic adding custom tokens
+8. [ ] Enable widget for limit and advanced orders
+9. [ ] Customizing the theme palette
+10. [ ] Remove navigations to other pages (click on logo or cow token)
+11. [ ] Change or hide logo
+12. [ ] Set custom tokens list from URL
+13. [ ] Set custom tokens list from JSON
