@@ -62,7 +62,7 @@ export function DemoPage(): HTMLElement {
             outline: 1px solid rgba(255,255,255,0.51);
         }
 
-        .settingsForm > button {
+        .actionButton, #mainMenu > button.active {
             background: rgb(202, 233, 255);
             color: rgb(5, 43, 101);
             border-radius: 8px;
@@ -73,8 +73,25 @@ export function DemoPage(): HTMLElement {
             font-size: 16px;
             font-weight: bold;
         }
+
+        #mainMenu {
+            max-width: 1000px;
+            text-align: center;
+            margin: 30px auto 0;
+            padding-left: 60px;
+        }
+
+        #mainMenu > button:not(.active) {
+            background: transparent;
+            color: rgb(202, 233, 255);
+            text-decoration: underline;
+        }
       </style>
 
+        <div id="mainMenu">
+            <button id="connectedProviderButton" class="actionButton active">Connected to provider</button>
+            <button id="standaloneModeButton" class="actionButton">Standalone mode</button>
+        </div>
       <div id="demoPage">
         <div class="settingsContainer" id="tradeSettings">
             <h3>CowSwap widget</h3>
@@ -125,7 +142,7 @@ export function DemoPage(): HTMLElement {
                         <option value="dark">Dark</option>
                     </select>
                 </label>
-                <button>Update</button>
+                <button class="actionButton">Update</button>
             </form>
         </div>
         <div id="widgetContainer"></div>
@@ -151,7 +168,7 @@ export function DemoPage(): HTMLElement {
                         name="hideNetworkSelector"
                         type="checkbox"/>
                 </label>
-                <button>Update</button>
+                <button class="actionButton">Update</button>
             </form>
         </div>
       </div>
