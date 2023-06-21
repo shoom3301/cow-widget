@@ -11,7 +11,7 @@
 7. [x] Automatic adding custom tokens
 8. [x] Enable widget for limit and advanced orders
 9. [ ] Customizing the theme palette
-10. [ ] Remove navigations to other pages (click on logo or cow token)
-11. [ ] Change or hide logo
+10. [x] Remove navigations to other pages (click on logo or cow token)
+11. [x] Change or hide logo
 12. [ ] Set custom tokens list from URL
 13. [ ] Set custom tokens list from JSON

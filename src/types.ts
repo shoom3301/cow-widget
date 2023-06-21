@@ -39,8 +39,18 @@ export interface CowSwapWidgetUrlParams {
   theme?: CowSwapTheme
 }
 
-export interface CowSwapWidgetParams {
+export interface CowSwapWidgetAppParams {
+  logoUrl?: string
+  hideLogo?: boolean
+  hideNetworkSelector?: boolean
+}
+
+export interface CowSwapWidgetSettings {
   urlParams: CowSwapWidgetUrlParams
+  appParams: CowSwapWidgetAppParams
+}
+
+export interface CowSwapWidgetParams {
   width: number
   height: number
   container: HTMLElement

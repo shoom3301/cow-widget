@@ -1,11 +1,9 @@
-import { cowSwapWidget, CowSwapWidgetUrlParams } from '../index'
+import { cowSwapWidget, CowSwapWidgetAppParams, CowSwapWidgetUrlParams } from '../index'
 import { DemoPage } from './DemoPage'
+import { Settings } from './Settings'
 
 const demoPage = DemoPage()
 document.body.appendChild(demoPage)
-
-const iframeContainer = document.getElementById('widgetContainer') as HTMLElement
-const settingsForm = document.getElementById('settingsForm') as HTMLFormElement
 
 if (!window.ethereum) {
   alert('Please, enable Metamask extension')
@@ -30,41 +28,16 @@ const urlParams: CowSwapWidgetUrlParams = {
   },
 }
 
-const updateWidget = cowSwapWidget({
-  urlParams,
-  width: 400,
-  height: 640,
-  container: iframeContainer,
-  provider: window.ethereum,
-})
+const appParams: CowSwapWidgetAppParams = {}
 
-function applySettings() {
-  const formState = Object.fromEntries(new FormData(settingsForm) as never)
+const updateWidget = cowSwapWidget(
+  {
+    width: 400,
+    height: 640,
+    container: document.getElementById('widgetContainer') as HTMLElement,
+    provider: window.ethereum,
+  },
+  { urlParams, appParams }
+)
 
-  updateWidget({
-    env: formState.env,
-    chainId: formState.chainId,
-    theme: formState.theme,
-    tradeType: formState.tradeType,
-    tradeAssets: {
-      sell: {
-        asset: formState['tradeAssets.sell.asset'],
-        amount: formState['tradeAssets.sell.amount'],
-      },
-      buy: {
-        asset: formState['tradeAssets.buy.asset'],
-        amount: formState['tradeAssets.buy.amount'],
-      },
-    },
-  })
-}
-
-settingsForm.addEventListener('submit', (event) => {
-  event.preventDefault()
-  applySettings()
-})
-
-settingsForm.addEventListener('change', (event) => {
-  event.preventDefault()
-  applySettings()
-})
+Settings(updateWidget)

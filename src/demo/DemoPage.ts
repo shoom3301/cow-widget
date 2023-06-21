@@ -12,7 +12,7 @@ export function DemoPage(): HTMLElement {
 
         #demoPage {
             display: grid;
-            grid-template-columns: 300px 1fr;
+            grid-template-columns: 300px 1fr 300px;
             max-width: 1000px;
             margin: 0 auto;
         }
@@ -29,38 +29,40 @@ export function DemoPage(): HTMLElement {
             box-shadow: 1px 10px 47px 0 rgba(83,196,239,0.6);
         }
 
-        #settingsContainer {
+        #tradeSettings, #tradeSettings input, #tradeSettings select {
             text-align: right;
+        }
+
+        .settingsContainer {
             color: #fff;
             margin-top: 30px;
         }
 
-        #settingsForm > label {
+        .settingsForm > label {
             display: block;
             margin-bottom: 15px;
         }
 
-        #settingsForm > label > span {
+        .settingsForm > label > span {
             display: block;
             margin-bottom: 2px;
         }
 
-        #settingsForm input, #settingsForm select {
+        .settingsForm input, .settingsForm select {
             border: 0;
             padding: 6px 0 4px 8px;
             border-right: 8px solid transparent;
-            text-align: right;
             background: #ffffff36;
             color: #fff;
             border-radius: 4px;
             outline: none;
         }
 
-        #settingsForm input:focus, #settingsForm select:focus {
+        .settingsForm input:focus, .settingsForm select:focus {
             outline: 1px solid rgba(255,255,255,0.51);
         }
 
-        #updateButton {
+        .settingsForm > button {
             background: rgb(202, 233, 255);
             color: rgb(5, 43, 101);
             border-radius: 8px;
@@ -74,9 +76,9 @@ export function DemoPage(): HTMLElement {
       </style>
 
       <div id="demoPage">
-        <div id="settingsContainer">
+        <div class="settingsContainer" id="tradeSettings">
             <h3>CowSwap widget</h3>
-            <form id="settingsForm">
+            <form class="settingsForm" id="tradeSettingsForm">
                 <label>
                     <span>Network</span>
                     <select name="chainId">
@@ -123,10 +125,35 @@ export function DemoPage(): HTMLElement {
                         <option value="dark">Dark</option>
                     </select>
                 </label>
-                <button id="updateButton">Update</button>
+                <button>Update</button>
             </form>
         </div>
         <div id="widgetContainer"></div>
+        <div class="settingsContainer">
+            <br/><br/><br/>
+            <form class="settingsForm" id="appSettingsForm">
+                <label>
+                    <span>Custom logo url</span>
+                    <input
+                        name="logoUrl"
+                        type="text"
+                        value="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_92x30dp.png"/>
+                </label>
+                <label>
+                    <span>Hide logo</span>
+                    <input
+                        name="hideLogo"
+                        type="checkbox"/>
+                </label>
+                <label>
+                    <span>Hide network selector</span>
+                    <input
+                        name="hideNetworkSelector"
+                        type="checkbox"/>
+                </label>
+                <button>Update</button>
+            </form>
+        </div>
       </div>
     </div>
   `
